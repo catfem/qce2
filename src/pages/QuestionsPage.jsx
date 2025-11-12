@@ -141,6 +141,10 @@ export default function QuestionsPage() {
     if (!user) return;
     setProcessing({ active: true, progress: 10 });
     try {
+      const aggregatedQuestions = [];
+      const nameParts = [];
+      let privateFlag = false;
+
       for (const [index, file] of files.entries()) {
         setProcessing({ active: true, progress: Math.round((index / files.length) * 80) });
         const uploadResult = await uploadToStorage(file, user.id);
@@ -152,9 +156,34 @@ export default function QuestionsPage() {
           signedUrl: uploadResult.signedUrl
         });
         setProcessing({ active: true, progress: 95 });
-        setReviewPayload({ questions: extraction.questions, metadata: extraction.metadata });
-        await fetchCredits();
+
+        if (Array.isArray(extraction.questions) && extraction.questions.length > 0) {
+          aggregatedQuestions.push(...extraction.questions);
+          if (extraction.metadata?.suggestedSetName) {
+            nameParts.push(extraction.metadata.suggestedSetName);
+          } else {
+            nameParts.push(file.name.replace(/\.[^/.]+$/, ''));
+          }
+          if (extraction.metadata?.isPrivate) {
+            privateFlag = true;
+          }
+        }
       }
+
+      if (aggregatedQuestions.length === 0) {
+        toast.warning('No questions were returned from the selected files.');
+        setProcessing({ active: false, progress: 0 });
+        return;
+      }
+
+      setReviewPayload({
+        questions: aggregatedQuestions,
+        metadata: {
+          suggestedSetName: nameParts.length > 1 ? `${nameParts[0]} + ${nameParts.length - 1} more` : nameParts[0],
+          isPrivate: privateFlag
+        }
+      });
+      await fetchCredits();
       setProcessing({ active: false, progress: 100 });
     } catch (error) {
       toast.error('AI extraction failed', { description: error.message });

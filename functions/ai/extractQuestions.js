@@ -89,7 +89,7 @@ export async function onRequestPost(context) {
   const session = await requireUser(context);
   if (session.response) return session.response;
 
-  const supabase = getServiceSupabase(context.env);
+  const supabase = session.supabase;
 
   const rateLimit = Number(context.env.AI_RATE_LIMIT_PER_MINUTE || 5);
   const since = new Date(Date.now() - 60 * 1000).toISOString();
@@ -101,7 +101,8 @@ export async function onRequestPost(context) {
   if (rateError) {
     return errorResponse('Unable to evaluate AI quota', 500, rateError);
   }
-  if (recentCalls.length >= rateLimit && session.profile.role !== 'admin') {
+  const recentCount = Array.isArray(recentCalls) ? recentCalls.length : 0;
+  if (recentCount >= rateLimit && session.profile.role !== 'admin') {
     return errorResponse('AI rate limit exceeded. Please retry shortly.', 429);
   }
 
@@ -110,6 +111,22 @@ export async function onRequestPost(context) {
   for (const field of requiredFields) {
     if (!body[field]) {
       return errorResponse(`Missing ${field}`, 400);
+    }
+  }
+
+  const aiCost = Number(context.env.AI_EXTRACTION_CREDIT_COST || 5);
+  if (session.profile.role !== 'admin' && aiCost > 0) {
+    try {
+      await deductCreditsTx(supabase, session.user.id, aiCost, {
+        reason: 'AI extraction',
+        fileName: body.fileName,
+        fileSize: body.fileSize
+      });
+    } catch (error) {
+      if (error.code === 'INSUFFICIENT_CREDITS') {
+        return errorResponse('Insufficient credits for AI extraction', 402);
+      }
+      return errorResponse('Unable to deduct credits for AI extraction', 500, error.message);
     }
   }
 
@@ -144,7 +161,8 @@ export async function onRequestPost(context) {
       metadata: {
         fileName: body.fileName,
         fileSize: body.fileSize,
-        error: errorMessage
+        error: errorMessage,
+        aiCost
       }
     })
     .select('*')
@@ -156,7 +174,8 @@ export async function onRequestPost(context) {
       latencyMs,
       suggestedSetName: `${body.fileName.replace(/\.[^/.]+$/, '')} · ${new Date().getFullYear()}`,
       isPrivate: body.isPrivate || false,
-      jobId: logEntry?.id
+      jobId: logEntry?.id,
+      aiCost
     }
   });
 }

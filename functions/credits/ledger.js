@@ -1,6 +1,5 @@
 import { requireUser, assertRole } from '../_lib/auth.js';
 import { errorResponse, json } from '../_lib/response.js';
-import { getServiceSupabase } from '../_lib/supabase.js';
 
 export async function onRequestPost(context) {
   const session = await requireUser(context);
@@ -9,8 +8,7 @@ export async function onRequestPost(context) {
   const forbidden = assertRole(session.profile, ['admin']);
   if (forbidden) return forbidden;
 
-  const supabase = getServiceSupabase(context.env);
-  const { data, error } = await supabase
+  const { data, error } = await session.supabase
     .from('credits_ledger')
     .select('id, user_id, amount, reason, created_at')
     .order('created_at', { ascending: false })

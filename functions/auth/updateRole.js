@@ -1,6 +1,5 @@
 import { requireUser, assertRole } from '../_lib/auth.js';
 import { errorResponse, json } from '../_lib/response.js';
-import { getServiceSupabase } from '../_lib/supabase.js';
 
 const ALLOWED_ROLES = ['user', 'moderator', 'admin'];
 
@@ -19,8 +18,7 @@ export async function onRequestPost(context) {
     return errorResponse('Unsupported role', 400);
   }
 
-  const supabase = getServiceSupabase(context.env);
-  const { data, error } = await supabase
+  const { data, error } = await session.supabase
     .from('users')
     .update({ role })
     .eq('id', userId)

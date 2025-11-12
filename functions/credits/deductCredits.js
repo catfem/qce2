@@ -1,6 +1,5 @@
 import { requireUser } from '../_lib/auth.js';
 import { errorResponse, json } from '../_lib/response.js';
-import { getServiceSupabase } from '../_lib/supabase.js';
 import { deductCreditsTx } from '../_lib/credits.js';
 
 export async function onRequestPost(context) {
@@ -13,9 +12,8 @@ export async function onRequestPost(context) {
     return errorResponse('Amount must be greater than zero', 400);
   }
 
-  const supabase = getServiceSupabase(context.env);
   try {
-    const result = await deductCreditsTx(supabase, session.user.id, value, metadata);
+    const result = await deductCreditsTx(session.supabase, session.user.id, value, metadata);
     return json(result);
   } catch (error) {
     if (error.code === 'INSUFFICIENT_CREDITS') {

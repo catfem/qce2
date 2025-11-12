@@ -1,6 +1,5 @@
 import { requireUser } from '../_lib/auth.js';
 import { errorResponse, json } from '../_lib/response.js';
-import { getServiceSupabase } from '../_lib/supabase.js';
 
 export async function onRequestGet(context) {
   const session = await requireUser(context);
@@ -12,8 +11,7 @@ export async function onRequestGet(context) {
     return errorResponse('Missing jobId', 400);
   }
 
-  const supabase = getServiceSupabase(context.env);
-  const { data, error } = await supabase
+  const { data, error } = await session.supabase
     .from('ai_logs')
     .select('*')
     .eq('id', jobId)

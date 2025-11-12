@@ -4,8 +4,8 @@ export const ROLES = {
   admin: 'admin'
 };
 
-export const DEFAULT_AI_EXTRACTION_COST = 5;
-export const REVIEW_CREDIT_COST = 2;
+export const DEFAULT_AI_EXTRACTION_COST = Number(import.meta.env.VITE_AI_EXTRACTION_COST ?? 5);
+export const REVIEW_CREDIT_COST = Number(import.meta.env.VITE_REVIEW_CREDIT_COST ?? 2);
 
 export const STORAGE_BUCKET = import.meta.env.VITE_SUPABASE_STORAGE_BUCKET || 'question-files';
 

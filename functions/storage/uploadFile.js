@@ -1,6 +1,5 @@
 import { requireUser } from '../_lib/auth.js';
 import { errorResponse, json } from '../_lib/response.js';
-import { getServiceSupabase } from '../_lib/supabase.js';
 
 export async function onRequestPost(context) {
   const session = await requireUser(context);
@@ -12,9 +11,8 @@ export async function onRequestPost(context) {
     return errorResponse('fileName required', 400);
   }
 
-  const supabase = getServiceSupabase(context.env);
   const path = `${session.user.id}/${Date.now()}-${fileName}`;
-  const { data, error } = await supabase.storage.from(bucket).createSignedUploadUrl(path);
+  const { data, error } = await session.supabase.storage.from(bucket).createSignedUploadUrl(path);
   if (error) {
     return errorResponse('Unable to create upload URL', 500, error);
   }
