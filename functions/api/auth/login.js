@@ -1,5 +1,5 @@
-import { requireUser } from '../_lib/auth.js';
-import { json } from '../_lib/response.js';
+import { requireUser } from '../../_lib/auth.js';
+import { json } from '../../_lib/response.js';
 
 export async function onRequestPost(context) {
   const session = await requireUser(context);

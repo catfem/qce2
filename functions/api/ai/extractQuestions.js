@@ -1,6 +1,6 @@
-import { requireUser } from '../_lib/auth.js';
-import { errorResponse, json } from '../_lib/response.js';
-import { deductCreditsTx } from '../_lib/credits.js';
+import { requireUser } from '../../_lib/auth.js';
+import { errorResponse, json } from '../../_lib/response.js';
+import { deductCreditsTx } from '../../_lib/credits.js';
 
 function determineMimeType(fileName) {
   if (fileName.endsWith('.pdf')) return 'application/pdf';
