@@ -1,6 +1,6 @@
-import { requireUser } from '../_lib/auth.js';
-import { errorResponse, json } from '../_lib/response.js';
-import { deductCreditsTx } from '../_lib/credits.js';
+import { requireUser } from '../../_lib/auth.js';
+import { errorResponse, json } from '../../_lib/response.js';
+import { deductCreditsTx } from '../../_lib/credits.js';
 
 export async function onRequestPost(context) {
   const session = await requireUser(context);

@@ -1,5 +1,5 @@
-import { requireUser, assertRole } from '../_lib/auth.js';
-import { errorResponse, json } from '../_lib/response.js';
+import { requireUser, assertRole } from '../../_lib/auth.js';
+import { errorResponse, json } from '../../_lib/response.js';
 
 const ALLOWED_ROLES = ['user', 'moderator', 'admin'];
 

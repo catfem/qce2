@@ -1,5 +1,5 @@
-import { requireUser, assertRole } from '../_lib/auth.js';
-import { errorResponse, json } from '../_lib/response.js';
+import { requireUser, assertRole } from '../../_lib/auth.js';
+import { errorResponse, json } from '../../_lib/response.js';
 
 export async function onRequestPost(context) {
   const session = await requireUser(context);
