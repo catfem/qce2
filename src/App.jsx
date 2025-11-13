@@ -4,8 +4,8 @@ import AppLayout from './components/layout/AppLayout.jsx';
 import Home from './pages/Home.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
 import SettingsPage from './pages/SettingsPage.jsx';
-import IntroductionPage from './pages/IntroductionPage.jsx';
 import QuestionsPage from './pages/QuestionsPage.jsx';
+import ResetPasswordPage from './pages/ResetPasswordPage.jsx';
 import { useUser } from './context/UserContext.jsx';
 
 function LoadingScreen() {
@@ -42,7 +42,7 @@ export default function App() {
       <Toaster richColors position="top-right" />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/introduction" element={<IntroductionPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route
           element={
             <ProtectedRoute>
