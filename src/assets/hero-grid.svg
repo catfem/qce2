@@ -1,0 +1,19 @@
+<svg width="900" height="900" viewBox="0 0 900 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g opacity="0.9" filter="url(#a)">
+    <path d="M150 450C150 302.385 252.385 200 400 200C547.615 200 650 302.385 650 450C650 597.615 547.615 700 400 700C252.385 700 150 597.615 150 450Z" fill="url(#b)" />
+    <path d="M250 450C250 347.611 327.611 270 430 270C532.389 270 610 347.611 610 450C610 552.389 532.389 630 430 630C327.611 630 250 552.389 250 450Z" fill="url(#c)" />
+  </g>
+  <defs>
+    <filter id="a" x="0" y="50" width="850" height="850" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="60" result="blur" />
+    </filter>
+    <linearGradient id="b" x1="150" y1="200" x2="650" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366F1" />
+      <stop offset="1" stop-color="#14B8A6" />
+    </linearGradient>
+    <linearGradient id="c" x1="250" y1="270" x2="610" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE" />
+      <stop offset="1" stop-color="#6366F1" />
+    </linearGradient>
+  </defs>
+</svg>
