@@ -9,7 +9,7 @@ import { useUser } from '../context/UserContext.jsx';
 import { useCredits } from '../context/CreditContext.jsx';
 import { fetchWorkspaceUsers, updateUserRole } from '../services/admin.js';
 import { allocateCredits, fetchCreditLedger } from '../services/credits.js';
-import { ROLES } from '../utils/constants.js';
+import { ROLES, DEFAULT_AI_EXTRACTION_COST } from '../utils/constants.js';
 
 const roleOptions = [
   { label: 'Level 1 · User', value: ROLES.user },
