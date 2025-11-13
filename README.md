@@ -8,7 +8,7 @@ A full-stack, AI-assisted assessment authoring platform built for Cloudflare Pag
 - **Role-Based Workspace** – Level 1 users author their own content, Level 2 moderators manage shared libraries, and Level 3 admins orchestrate credits, roles, and policies.
 - **Credit Ledger** – Track allocations and consumption per AI action with admin-configurable limits and automatic blocking when balances run out.
 - **Question Bank Management** – CRUD for questions and sets, visibility toggles, tagging, difficulty/category metadata, merging, duplication, and exports (CSV, PDF, DOCX).
-- **Glassmorphism UI** – Modern shadcn-inspired components with dashboards, onboarding flows, async indicators, and analytics.
+- **Glassmorphism UI** – Modern shadcn-inspired components with dashboards, async indicators, and analytics.
 - **Cloud Native** – Designed for Cloudflare Pages deploys, using Supabase for authentication, PostgreSQL, and storage.
 
 ## Project Structure

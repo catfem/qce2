@@ -42,9 +42,6 @@ export default function Home() {
               <Button size="lg" onClick={user ? () => navigate('/dashboard') : loginWithGoogle}>
                 {user ? 'Enter dashboard' : 'Continue with Google'}
               </Button>
-              <Button variant="secondary" size="lg" onClick={() => navigate('/introduction')}>
-                Explore introduction
-              </Button>
             </div>
           </div>
         </div>

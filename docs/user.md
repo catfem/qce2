@@ -21,15 +21,7 @@ The dashboard highlights:
 
 Use this page to monitor personal progress and plan credit usage before initiating large uploads.
 
-## 3. Onboarding & Introduction Pages
-
-Navigate to **Introduction** for a guided tour:
-
-- **Overview tab** – how Google login, uploads, and AI review loops work.
-- **Dashboard tab** – tips for interpreting analytics and activity feeds.
-- **Roles tab** – responsibilities and allowances for each role tier.
-
-## 4. Uploading Files & AI Extraction
+## 3. Uploading Files & AI Extraction
 
 1. Open the **Questions** page.
 2. Drag-and-drop PDF, DOCX, TXT, or XLSX files into the dropzone (or click to browse).
@@ -42,7 +34,7 @@ Navigate to **Introduction** for a guided tour:
 
 If credits are insufficient, you’ll receive an alert and the extraction will not run. Contact an admin for a top-up.
 
-## 5. Managing Questions
+## 4. Managing Questions
 
 Within the **Questions** page:
 
@@ -51,7 +43,7 @@ Within the **Questions** page:
 - **Question Sets** panel – create new sets, merge two sets, duplicate a set, export (CSV/PDF/DOCX), or share sets (moderator/admin only).
 - **Exports** – downloaded files include your questions, options, and explanations for offline review.
 
-## 6. Settings & Account
+## 5. Settings & Account
 
 The **Settings** page summarises:
 
@@ -61,14 +53,14 @@ The **Settings** page summarises:
 
 As a non-admin user you can still reference the information tiles to understand how the workspace is configured.
 
-## 7. Tips & Best Practices
+## 6. Tips & Best Practices
 
 - Maintain meaningful tags and references so team members can filter quickly.
 - Use private sets while refining questions; publish to open once they are ready.
 - Re-run AI extraction on improved source files to enrich the bank, but keep an eye on credit consumption.
 - Moderators should record notable edits in set descriptions or share notes via external collaboration tools.
 
-## 8. Need Help?
+## 7. Need Help?
 
 - Insufficient credits? Contact an admin (Settings → Credit Management) to request a top-up.
 - Question set missing? Ensure you toggled “View all questions” instead of “Private only.”
