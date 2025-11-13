@@ -85,6 +85,46 @@ export function UserProvider({ children }) {
     }
   }, []);
 
+  const signUp = useCallback(async (email, password) => {
+    const { error, data } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/dashboard`
+      }
+    });
+    if (error) {
+      toast.error('Sign up failed', { description: error.message });
+      return { success: false, error };
+    }
+    toast.success('Account created! Please check your email to verify your account.');
+    return { success: true, data };
+  }, []);
+
+  const signInWithEmail = useCallback(async (email, password) => {
+    const { error, data } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+    if (error) {
+      toast.error('Sign in failed', { description: error.message });
+      return { success: false, error };
+    }
+    return { success: true, data };
+  }, []);
+
+  const resetPassword = useCallback(async (email) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`
+    });
+    if (error) {
+      toast.error('Password reset failed', { description: error.message });
+      return { success: false, error };
+    }
+    toast.success('Password reset email sent! Please check your inbox.');
+    return { success: true };
+  }, []);
+
   const logout = useCallback(async () => {
     await supabase.auth.signOut();
     setUser(null);
@@ -102,10 +142,13 @@ export function UserProvider({ children }) {
       accessToken,
       loading,
       loginWithGoogle,
+      signUp,
+      signInWithEmail,
+      resetPassword,
       logout,
       refreshProfile: fetchProfile
     }),
-    [user, profile, role, accessToken, loading, loginWithGoogle, logout, fetchProfile]
+    [user, profile, role, accessToken, loading, loginWithGoogle, signUp, signInWithEmail, resetPassword, logout, fetchProfile]
   );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

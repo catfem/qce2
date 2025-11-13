@@ -5,8 +5,14 @@ Welcome to the Gemini AI Question Bank. This guide walks through onboarding, das
 ## 1. Getting Started
 
 1. Open the application (Cloudflare Pages URL or `http://localhost:5173` in development).
-2. Click **Continue with Google** on the home page. You will be redirected to Supabase’s Google OAuth flow.
-3. After login, you land on the **Dashboard**.
+2. Click **Get started** on the home page to open the authentication modal.
+3. Choose your preferred sign-in method:
+   - **Continue with Google** - Use your Google account via Supabase OAuth
+   - **Or continue with email** - Use email and password for offline account access
+4. For new users, click **Sign up** to create an account with your email and password.
+5. After successful authentication, you land on the **Dashboard**.
+
+> **Password Reset**: If you forget your password, click **Forgot password?** in the authentication modal and enter your email address. You'll receive a reset link to create a new password.
 
 > Your workspace role determines what you can see and do. Level 1 (User) accounts manage their own content; Level 2 (Moderator) accounts can review every question; Level 3 (Admin) accounts control settings and credits.
 

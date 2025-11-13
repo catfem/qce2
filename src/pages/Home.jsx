@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button.jsx';
 import { Badge } from '../components/ui/Badge.jsx';
+import { AuthModal } from '../components/ui/AuthModal.jsx';
 import { useUser } from '../context/UserContext.jsx';
+import { useState } from 'react';
 import heroImage from '../assets/hero-grid.svg';
 
 const featureHighlights = [
@@ -20,8 +22,17 @@ const featureHighlights = [
 ];
 
 export default function Home() {
-  const { loginWithGoogle, user } = useUser();
+  const { user } = useUser();
   const navigate = useNavigate();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  const handleAuthClick = () => {
+    if (user) {
+      navigate('/dashboard');
+    } else {
+      setShowAuthModal(true);
+    }
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
@@ -39,8 +50,8 @@ export default function Home() {
               Manage private and open collections, moderate collaboratively, and control usage with a transparent credit system.
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              <Button size="lg" onClick={user ? () => navigate('/dashboard') : loginWithGoogle}>
-                {user ? 'Enter dashboard' : 'Continue with Google'}
+              <Button size="lg" onClick={handleAuthClick}>
+                {user ? 'Enter dashboard' : 'Get started'}
               </Button>
             </div>
           </div>
@@ -54,6 +65,8 @@ export default function Home() {
           ))}
         </section>
       </div>
+      
+      <AuthModal open={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </div>
   );
 }
